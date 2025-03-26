@@ -43,7 +43,10 @@ class _RidePrefFormState extends State<RidePrefForm> {
   // Initialize the Form attributes
   // ----------------------------------
 
-  void _initializeForm() {
+  @override
+  void initState() {
+    super.initState();
+
     if (widget.initialPreference != null) {
       RidePreference current = widget.initialPreference!;
       departure = current.departure;
@@ -51,27 +54,11 @@ class _RidePrefFormState extends State<RidePrefForm> {
       departureDate = current.departureDate;
       requestedSeats = current.requestedSeats;
     } else {
-      // If no given preferences, we select default ones:
+      // If no given preferences, we select default ones :
       departure = null; // User shall select the departure
-      // Normalize to start of the day
-      departureDate = DateTime.now();
-      departureDate = DateTime(departureDate.year, departureDate.month, departureDate.day);
+      departureDate = DateTime.now(); // Now  by default
       arrival = null; // User shall select the arrival
-      requestedSeats = 1; // 1 seat by default
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _initializeForm();
-  }
-
-  @override
-  void didUpdateWidget(RidePrefForm oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.initialPreference != oldWidget.initialPreference) {
-      _initializeForm();
+      requestedSeats = 1; // 1 seat book by default
     }
   }
 
@@ -118,12 +105,10 @@ class _RidePrefFormState extends State<RidePrefForm> {
     bool isValid = hasDeparture && hasArrival;
 
     if (isValid) {
-      // Normalize departureDate to start of the day
-      final normalizedDate = DateTime(departureDate.year, departureDate.month, departureDate.day);
       // 2 - Create a  new preference
       RidePreference newPreference = RidePreference(
         departure: departure!,
-        departureDate: normalizedDate,
+        departureDate: departureDate,
         arrival: arrival!,
         requestedSeats: requestedSeats,
       );
