@@ -1,0 +1,20 @@
+{
+  "locations": {
+    "003": {
+      "name": "France"
+    },
+    "-OMColWn5WQ___4lsPbB": {
+      "name": "Paris"
+    }
+  },
+  "user": {
+    "001": {
+      "age": 25,
+      "name": "Alice"
+    },
+    "002": {
+      "age": 25,
+      "name": "Ronan"
+    }
+  }
+}
